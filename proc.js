@@ -474,7 +474,7 @@ function fillTable() {
             if (!canShowVal(yAxis.id, val.key)) {
                 continue;
             }
-            newContent += `<tr><td class="axis_label_td${(superFirst ? '' : ' superaxis_second')}" title="${escapeHtml(val.description)}">${optDescribe(y2first, y2val)}<b>${escapeHtml(val.title)}</b></td>`;
+            newContent += `<tr><td class="axis_label_td${(superFirst ? '' : ' superaxis_second')}" title="${escapeHtml(val.description)}">${optDescribe(y2first, y2val)}<b class="axis_label_clickable" onclick="clickRowLabel('${yAxis.id}', '${val.key.replaceAll("\\", "\\\\").replaceAll("'", "\\'").replaceAll('"', '&quot;')}')" title="Click to hide row">${escapeHtml(val.title)}</b></td>`;
             y2first = false;
             for (var x2val of (x2Axis == null ? [null] : x2Axis.values)) {
                 if (x2val != null && !canShowVal(x2Axis.id, x2val.key)) {
@@ -572,6 +572,13 @@ function toggleShowAllAxis(axisId) {
         setShowVal(axisId, val.key, !hide);
     }
     fillTable();
+}
+
+function clickRowLabel(axis, val) {
+    let checkbox = document.getElementById(`showval_${axis}__${val}`);
+    if (checkbox) {
+        checkbox.click();
+    }
 }
 
 function toggleShowVal(axis, val) {

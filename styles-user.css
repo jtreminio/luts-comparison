@@ -1,3 +1,12 @@
 /*
  Add your own CSS rules to this file (instead of modifying styles.css)
 */
+
+.axis_label_clickable {
+    cursor: pointer;
+}
+
+.axis_label_clickable:hover {
+    text-decoration: line-through;
+    color: #ff6060;
+}
